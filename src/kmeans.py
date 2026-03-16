@@ -1,12 +1,13 @@
 import sys
 import random
 import math
+import matplotlib.pyplot as plt
 
 def read_dataset(filename):
     data = []
     with open(filename, "r") as f:
         for line in f:
-            if not line.strip(): continue # Skip empty lines
+            if not line.strip(): continue 
             values = line.strip().split(",")
             try:
                 # Dynamically read all columns except the last one (usually the label)
@@ -35,7 +36,7 @@ def assign_clusters(data, centroids):
 def update_centroids(clusters):
     new_centroids = []
     for cluster in clusters:
-        if not cluster: # Handle potential empty clusters
+        if not cluster: 
             continue
         dims = len(cluster[0])
         centroid = [sum(p[i] for p in cluster) / len(cluster) for i in range(dims)]
@@ -72,7 +73,23 @@ def kmeans(data, k, epsilon, max_iterations):
     else:
         print("Reached maximum iterations.")
 
-    return clusters, centroids
+    return clusters, centroids, ssd
+
+def plot_goodness(data, max_k, epsilon, max_iterations):
+    k_values = list(range(1, max_k + 1))
+    ssd_results = []
+
+    for k in k_values:
+        _, _, final_ssd = kmeans(data, k, epsilon, max_iterations)
+        ssd_results.append(final_ssd)
+
+    plt.figure(figsize=(8, 5))
+    plt.plot(k_values, ssd_results, marker='o', linestyle='-', color='r')
+    plt.title("Goodness of Clustering (SSD vs Number of Clusters)")
+    plt.xlabel("Number of Clusters (k)")
+    plt.ylabel("Total SSD")
+    plt.grid(True)
+    plt.savefig("goodness_of_clustering.png")
 
 def main():
     if len(sys.argv) < 5:
@@ -85,12 +102,16 @@ def main():
     max_iterations = int(sys.argv[4])
 
     data = read_dataset(filename)
-    clusters, centroids = kmeans(data, k, epsilon, max_iterations)
-
-    print("\nFinal SSD:", compute_ssd(clusters, centroids))
-    print("Final Centroids:")
+    
+    clusters, centroids, final_ssd = kmeans(data, k, epsilon, max_iterations)
+    
+    print(f"--- Results for k={k} ---")
+    print(f"Final SSD: {final_ssd}")
     for i, c in enumerate(centroids):
-        print(f"Cluster {i}: {c}")
+        print(f"Cluster {i} Center: {c}")
+
+    print("\nGenerating Goodness of Clustering plot...")
+    plot_goodness(data, 10, epsilon, max_iterations)
 
 if __name__ == "__main__":
     main()

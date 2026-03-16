@@ -13,7 +13,7 @@ This is a from-scratch implementation of the k-means clustering algorithm design
 ## Installation & Requirements
 - Python 3.x
 - Standard libraries: `csv`, `math`, `random`, `sys`
-- No third-party machine learning libraries (scikit-learn, etc.) are required.
+- `matplotlib` for plotting.
 
 ## Usage
 Run the script from the terminal using the following syntax:

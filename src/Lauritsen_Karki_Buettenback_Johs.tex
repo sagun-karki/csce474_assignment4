@@ -78,19 +78,19 @@ The algorithm terminates when the maximum number of iterations is reached or the
 
 \subsection{Runtime vs. Number of Clusters ($k$)}
 \begin{center}
-  \includegraphics[width=0.65\textwidth]{runtime_vs_k.png}
+  \includegraphics[width=0.65\textwidth]{results/runtime_vs_k.png}
 \end{center}
 As shown above, runtime increases linearly with $k$. This is due to the assignment step requiring $n \times k$ distance calculations per iteration.
 
 \subsection{Runtime vs. Number of Dimensions ($d$)}
 \begin{center}
-  \includegraphics[width=0.65\textwidth]{runtime_vs_dims.png}
+  \includegraphics[width=0.65\textwidth]{results/runtime_vs_dims.png}
 \end{center}
 The graph demonstrates a positive correlation between dimensionality and runtime. Increasing $d$ adds overhead to the sum of squared differences in every distance calculation.
 
 \subsection{Runtime vs. Dataset Size ($n$)}
 \begin{center}
-  \includegraphics[width=0.65\textwidth]{runtime_vs_size.png}
+  \includegraphics[width=0.65\textwidth]{results/runtime_vs_size.png}
 \end{center}
 Runtime scales linearly with $n$. The algorithm must iterate through the entire dataset to assign points to centroids, meaning doubling $n$ effectively doubles the operations per iteration.
 
@@ -98,7 +98,7 @@ Runtime scales linearly with $n$. The algorithm must iterate through the entire 
 We used the Elbow Method to determine the optimal $k$.
 
 \begin{center}
-  \includegraphics[width=0.65\textwidth]{goodness_of_clustering.png}
+  \includegraphics[width=0.65\textwidth]{results/goodness_of_clustering.png}
 \end{center}
 
 SSD naturally decreases as $k$ increases. However, the curve flattens after a distinct "elbow" at $k=3$. Beyond this point, the marginal gain in SSD reduction diminishes, confirming $k=3$ as the optimal choice for the Iris dataset.

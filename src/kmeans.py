@@ -4,6 +4,9 @@ import math
 import csv
 import time
 import matplotlib.pyplot as plt
+import os
+
+os.makedirs("results", exist_ok=True)
 
 def read_dataset(filename):
     raw_data = []
@@ -102,7 +105,7 @@ def plot_runtime_vs_k(data, epsilon, max_iter):
     plt.title("Runtime vs Number of Clusters")
     plt.xlabel("Number of Clusters (k)")
     plt.ylabel("Runtime (seconds)")
-    plt.savefig("runtime_vs_k.png")
+    plt.savefig("results/runtime_vs_k.png")
     plt.close()
 
 def plot_runtime_vs_dims(data, k, epsilon, max_iter):
@@ -120,7 +123,7 @@ def plot_runtime_vs_dims(data, k, epsilon, max_iter):
     plt.title("Runtime vs Number of Dimensions")
     plt.xlabel("Number of Dimensions")
     plt.ylabel("Runtime (seconds)")
-    plt.savefig("runtime_vs_dims.png")
+    plt.savefig("results/runtime_vs_dims.png")
     plt.close()
 
 def plot_runtime_vs_size(data, k, epsilon, max_iter):
@@ -138,7 +141,7 @@ def plot_runtime_vs_size(data, k, epsilon, max_iter):
     plt.title("Runtime vs Dataset Size")
     plt.xlabel("Dataset Size")
     plt.ylabel("Runtime (seconds)")
-    plt.savefig("runtime_vs_size.png")
+    plt.savefig("results/runtime_vs_size.png")
     plt.close()
 
 def plot_goodness(data, k_max, epsilon, max_iter):
@@ -154,7 +157,7 @@ def plot_goodness(data, k_max, epsilon, max_iter):
     plt.xlabel("Number of Clusters (k)")
     plt.ylabel("Total SSD")
     plt.grid(True)
-    plt.savefig("goodness_of_clustering.png")
+    plt.savefig("results/goodness_of_clustering.png")
     plt.close()
     print(f"Optimal k estimation saved to goodness_of_clustering.png")
 
